@@ -39,4 +39,4 @@ $Task = New-ScheduledTask -Action $Action -Trigger $TriggerStartup, $TriggerLogo
 Register-ScheduledTask -TaskName "DisAVleOnBoot" -InputObject $Task
 ```
 
-Win or lose, blame yourself, if anything happens to you, because you are still alive 🫶🏻
+### _Win or lose, blame yourself, if anything happens to you, because you are still alive_ 🫶🏻
