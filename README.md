@@ -1,5 +1,5 @@
 🧑‍🎓 This stupid repo is created for educational purposes only [_and only for me!_]
-
+Because if CloudProtection is enabled you won't go far! x_x
 🤷‍♂️ But if you are in the same boat with me [_having a Windows VM that restarts WinDefend features every time on StartUp_], then you are at the right time, in the right place [probably] :)
 
 # DisAVling
@@ -16,6 +16,11 @@ echo "Set-MpPreference -DisableBehaviorMonitoring $true;">> C:\Users\Public\DisA
 echo "Set-MpPreference -DisableScriptScanning $true;">> C:\Users\Public\DisAVle.txt;
 echo "Set-MpPreference -DisableIntrusionPreventionSystem $true;">> C:\Users\Public\DisAVle.txt;
 echo "Set-MpPreference -DisableIOAVProtection $true;">> C:\Users\Public\DisAVle.txt;
+echo "Set-MpPreference -DisableCloudProtection $true;">> C:\Users\Public\DisAVle.txt;
+echo "Set-MpPreference -SubmitSamplesConsent NeverSend;">> C:\Users\Public\DisAVle.txt;
+echo "Set-MpPreference -DisableBlockAtFirstSeen $true;">> C:\Users\Public\DisAVle.txt;
+echo "Set-MpPreference -MAPSReporting Disabled;">> C:\Users\Public\DisAVle.txt;
+echo "NetSh Advfirewall set allprofiles state off;">> C:\Users\Public\DisAVle.txt;
 echo "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;" >> C:\Users\Public\DisAVle.txt
 ```
 Or just download the `disAVle.txt` file from repository into `C:\Users\Public\`.
