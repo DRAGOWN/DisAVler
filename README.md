@@ -40,3 +40,4 @@ Register-ScheduledTask -TaskName "DisAVleOnBoot" -InputObject $Task
 ```
 
 ### _Win or lose, blame yourself, if anything happens to you, because you are still alive_ 🫶🏻
+<!-- [Giorgi Dograshvili]([url](https://www.linkedin.com/in/giorgi-dograshvili)) -->
