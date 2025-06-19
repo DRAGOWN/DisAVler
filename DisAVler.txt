@@ -33,11 +33,11 @@ Set-MpPreference -PUAProtection 0;
 Set-MpPreference -DisableCloudProtection $true;
 Stop-Service -Name WinDefend -Force;
 Set-Service -Name WinDefend -StartupType Disabled;
-$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
-$propertyName = "SmartScreenEnabled"
-$desiredValue = "Off"
+$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer";
+$propertyName = "SmartScreenEnabled";
+$desiredValue = "Off";
 if (-not (Test-Path $regPath)) {
     New-Item -Path $regPath -Force | Out-Null
-}
-Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force
+};
+Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force;
 
