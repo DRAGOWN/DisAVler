@@ -7,7 +7,7 @@ $propertyName = "Enabled"| Out-Null;
 $desiredValue = 0| Out-Null;
 if (-not (Test-Path $regPath)) {
     New-Item -Path $regPath -Force | Out-Null
-}| Out-Null;
+};
 Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force| Out-Null;
 Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen False| Out-Null;
 Set-MpPreference -UILockdown $true| Out-Null;
@@ -38,7 +38,7 @@ $propertyName = "SmartScreenEnabled"| Out-Null;
 $desiredValue = "Off"| Out-Null;
 if (-not (Test-Path $regPath)) {
     New-Item -Path $regPath -Force | Out-Null
-}| Out-Null;
+};
 Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force| Out-Null;
 echo "It worked!"
 
