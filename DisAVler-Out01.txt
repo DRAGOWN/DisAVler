@@ -35,7 +35,7 @@ Stop-Service -Name WinDefend -Force -ErrorAction SilentlyContinue;
 Set-Service -Name WinDefend -StartupType Disabled -ErrorAction SilentlyContinue;
 $regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer";
 $propertyName = "SmartScreenEnabled";
-$desiredValue = "Off" -ErrorAction SilentlyContinue;
+$desiredValue = "Off";
 if (-not (Test-Path $regPath)) {
     New-Item -Path $regPath -Force | Out-Null
 };
