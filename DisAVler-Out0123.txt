@@ -6,7 +6,7 @@ $regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settin
 $propertyName = "Enabled";
 $desiredValue = 0;
 if (-not (Test-Path $regPath)) {
-    New-Item -Path $regPath -Force | Out-Null
+    New-Item -Path $regPath -Force
 };
 Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force -ErrorAction SilentlyContinue;
 Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen False -ErrorAction SilentlyContinue;
@@ -37,7 +37,7 @@ $regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer";
 $propertyName = "SmartScreenEnabled";
 $desiredValue = "Off";
 if (-not (Test-Path $regPath)) {
-    New-Item -Path $regPath -Force | Out-Null
+    New-Item -Path $regPath -Force
 };
 Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force -ErrorAction SilentlyContinue;
 echo "It worked!"
