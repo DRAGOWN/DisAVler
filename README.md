@@ -1,6 +1,6 @@
 🧑‍🎓 This **_naive_** repo is created for educational purposes only [_and only for me!_]
 
-Why **_naive_** ? Because if CloudProtection is enabled you won't go far! 🤷‍♂️ 
+Why **_naive_** ? Because if **_App & browser control's Check apps and files_** function is enabled you won't go far! 🤷‍♂️ 
 
 Why I created it? If you are in the same boat with me, _having a lab Windows VM that restarts WinDefend features every time on StartUp_, then you are at the right time, in the right place [probably] :)
 
@@ -17,6 +17,7 @@ Download the `disAVler.txt` file from repository into `C:\Windows\Tasks\`.
 Or Execute this sh1t with PS [offline]:
 ```
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -Name "DisableEnhancedNotifications" -Type DWord -Value 1;' > C:\Windows\Tasks\DisAVler.txt;
+echo 'Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen 0 -ErrorAction SilentlyContinue;' >> C:\Windows\Tasks\DisAVler.txt;
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1;' >> C:\Windows\Tasks\DisAVler.txt;
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Value "Off" -Force;' >> C:\Windows\Tasks\DisAVler.txt;
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1;' >> C:\Windows\Tasks\DisAVler.txt;
@@ -99,6 +100,11 @@ $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -StartWhenAvai
 $Task = New-ScheduledTask -Action $Action -Trigger $TriggerStartup, $TriggerLogon -Principal $Principal -Settings $Settings
 
 Register-ScheduledTask -TaskName "DisAVlerOnBoot" -InputObject $Task
+```
+
+# Restore configurations
+```
+IEX(New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/DRAGOWN/DisAVling/refs/heads/main/EnAVler.txt')"
 ```
 
 ### _Win or lose, blame yourself, if anything happens to you, because you are still alive_ 🫶🏻
