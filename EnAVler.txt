@@ -1,0 +1,39 @@
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" -Name "DisableEnhancedNotifications" -Type DWord -Value 0 -ErrorAction SilentlyContinue
+Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -ErrorAction SilentlyContinue
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Value "RequireAdmin" -Force -ErrorAction SilentlyContinue
+$regPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance"
+$propertyName = "Enabled"
+$desiredValue = 1
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force
+}
+Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force -ErrorAction SilentlyContinue
+Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen $true -ErrorAction SilentlyContinue
+Set-MpPreference -UILockdown $false -ErrorAction SilentlyContinue
+cd "C:\Program Files\Windows Defender" -ErrorAction SilentlyContinue
+.\MpCmdRun.exe -SignatureUpdate -ErrorAction SilentlyContinue
+Remove-MpPreference -ErrorAction SilentlyContinue
+Set-MpPreference -DisableRealtimeMonitoring $false -ErrorAction SilentlyContinue
+Set-MpPreference -SubmitSamplesConsent 1 -ErrorAction SilentlyContinue  # basic consent
+Set-MpPreference -DisableArchiveScanning $false -ErrorAction SilentlyContinue
+Set-MpPreference -DisableEmailScanning $false -ErrorAction SilentlyContinue
+Set-MpPreference -DisableScriptScanning $false -ErrorAction SilentlyContinue
+Set-MpPreference -DisableIntrusionPreventionSystem $false -ErrorAction SilentlyContinue
+Set-MpPreference -DisableIOAVProtection $false -ErrorAction SilentlyContinue
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled $true -ErrorAction SilentlyContinue
+Set-MpPreference -DisableBehaviorMonitoring $false -ErrorAction SilentlyContinue
+Set-MpPreference -DisableBlockAtFirstSeen $false -ErrorAction SilentlyContinue
+Set-MpPreference -MAPSReporting 1 -ErrorAction SilentlyContinue
+Set-MpPreference -PUAProtection 1 -ErrorAction SilentlyContinue
+Set-MpPreference -DisableCloudProtection $false -ErrorAction SilentlyContinue
+Set-Service -Name WinDefend -StartupType Automatic -ErrorAction SilentlyContinue
+Start-Service -Name WinDefend -ErrorAction SilentlyContinue
+$regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
+$propertyName = "SmartScreenEnabled"
+$desiredValue = "RequireAdmin"
+if (-not (Test-Path $regPath)) {
+    New-Item -Path $regPath -Force
+}
+Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force -ErrorAction SilentlyContinue
+Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen 1 -ErrorAction SilentlyContinue
+echo "Restoration completed successfully!"
