@@ -8,19 +8,19 @@ if (-not (Test-Path $regPath)) {
     New-Item -Path $regPath -Force
 }
 Set-ItemProperty -Path $regPath -Name $propertyName -Value $desiredValue -Force -ErrorAction SilentlyContinue
-Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen $true -ErrorAction SilentlyContinue
+Set-NetFirewallProfile -Profile Domain,Private,Public -NotifyOnListen True -ErrorAction SilentlyContinue
 Set-MpPreference -UILockdown $false -ErrorAction SilentlyContinue
 cd "C:\Program Files\Windows Defender" -ErrorAction SilentlyContinue
 .\MpCmdRun.exe -SignatureUpdate -ErrorAction SilentlyContinue
 Remove-MpPreference -ErrorAction SilentlyContinue
 Set-MpPreference -DisableRealtimeMonitoring $false -ErrorAction SilentlyContinue
-Set-MpPreference -SubmitSamplesConsent 1 -ErrorAction SilentlyContinue  # basic consent
+Set-MpPreference -SubmitSamplesConsent 1 -ErrorAction SilentlyContinue
 Set-MpPreference -DisableArchiveScanning $false -ErrorAction SilentlyContinue
 Set-MpPreference -DisableEmailScanning $false -ErrorAction SilentlyContinue
 Set-MpPreference -DisableScriptScanning $false -ErrorAction SilentlyContinue
 Set-MpPreference -DisableIntrusionPreventionSystem $false -ErrorAction SilentlyContinue
 Set-MpPreference -DisableIOAVProtection $false -ErrorAction SilentlyContinue
-Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled $true -ErrorAction SilentlyContinue
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True -ErrorAction SilentlyContinue
 Set-MpPreference -DisableBehaviorMonitoring $false -ErrorAction SilentlyContinue
 Set-MpPreference -DisableBlockAtFirstSeen $false -ErrorAction SilentlyContinue
 Set-MpPreference -MAPSReporting 1 -ErrorAction SilentlyContinue
