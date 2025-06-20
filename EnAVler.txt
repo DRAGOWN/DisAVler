@@ -25,7 +25,7 @@ Set-MpPreference -DisableBehaviorMonitoring $false -ErrorAction SilentlyContinue
 Set-MpPreference -DisableBlockAtFirstSeen $false -ErrorAction SilentlyContinue
 Set-MpPreference -MAPSReporting 1 -ErrorAction SilentlyContinue
 Set-MpPreference -PUAProtection 1 -ErrorAction SilentlyContinue
-Set-MpPreference -DisableCloudProtection $false -ErrorAction SilentlyContinue
+Set-MpPreference -DisableCloudProtection False -ErrorAction SilentlyContinue
 Set-Service -Name WinDefend -StartupType Automatic -ErrorAction SilentlyContinue
 Start-Service -Name WinDefend -ErrorAction SilentlyContinue
 $regPath = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer"
